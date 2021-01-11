@@ -11,7 +11,6 @@ public class PaperRefill extends Thread {
         while (true) {
 
             if (printer.printedPaperCount == printer.MAX_TRAY_PAPER_COUNT) {
-                System.out.println("Value of this " + this.printer);
                 printer.papersRefilling();
             }
         }
