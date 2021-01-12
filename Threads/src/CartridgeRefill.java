@@ -1,19 +1,26 @@
 public class CartridgeRefill extends Thread {
 
-    Printer printer;
-
-    public CartridgeRefill(Printer printer) {
-        this.printer = printer;
+    public void cartridgeRefilling() {
+        synchronized (this) {
+            Printer.USED_CARTRIDGE_COUNT = 0;
+            try {
+                System.out.println("Cartridge Refilling");
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            this.notify();
+        }
     }
 
     @Override
     public void run() {
         while (true) {
-            if (printer.printedCartridgeCount == printer.MAX_INK_CART_COUNT) {
-                printer.cartridgeRefilling();
+            if (Printer.USED_CARTRIDGE_COUNT == Printer.MAX_CARTRIDGE_COUNT) {
+                cartridgeRefilling();
             }
         }
-    }
 
+    }
 
 }

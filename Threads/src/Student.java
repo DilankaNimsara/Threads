@@ -8,10 +8,6 @@ public class Student extends Thread {
 
     @Override
     public void run() {
-        while (Printer.isAllocated) {
-
-        }
-        Printer.isAllocated = true;
         printer.print();
     }
 }
